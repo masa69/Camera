@@ -6,6 +6,8 @@ target 'Camera' do
   use_frameworks!
 
   # Pods for Camera
+  pod 'GPUImage', '~> 0.1'
+  pod 'SwiftyMarkdown'
 
   target 'CameraTests' do
     inherit! :search_paths
