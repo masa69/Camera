@@ -11,6 +11,8 @@ class LicenceTextView: UITextView {
             if let data = NSData(contentsOfFile: path) {
                 if let text: String = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) as String? {
                     let md: SwiftyMarkdown = SwiftyMarkdown(string: text)
+                    md.body.color = UIColor.darkGray
+                    md.body.fontSize = 14.0
                     self.attributedText = md.attributedString()
                 }
             }

@@ -1,16 +1,18 @@
-
+/*
 import UIKit
 import GPUImage
 
-class CameraScreenView: UIView {
+class VideoCamera: UIView {
     
-//    var finishCapture: ((_ image: UIImage?) -> Void)?
-//    private var camera: GPUImageVideoCamera?
-//    private var writer: GPUImageMovieWriter?
-//    private var url: URL = FileManager.photoURL
-//    private var promise: Timer?
+    var finishCapture: ((_ image: UIImage?) -> Void)?
     
-    private var camera: GPUImageStillCamera?
+    private var camera: GPUImageVideoCamera?
+    
+    private var writer: GPUImageMovieWriter?
+    
+    private var url: URL = FileManager.photoURL
+    
+    private var promise: Timer?
     
     private var filter: GPUImageFilter = GPUImageFilter()
     
@@ -22,27 +24,15 @@ class CameraScreenView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        FileManager.forbidBackupToiCloud()
         self.backgroundColor = UIColor.black
+        
         self.imageView = GPUImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
-        self.imageView?.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
-//        self.imageView?.fillMode = kGPUImageFillModePreserveAspectRatio
-//        self.imageView?.fillMode = kGPUImageFillModeStretch
-        self.camera = GPUImageStillCamera(sessionPreset: AVCaptureSession.Preset.photo.rawValue, cameraPosition: .back)
-        self.camera?.outputImageOrientation = .portrait
-        self.camera?.horizontallyMirrorFrontFacingCamera = true
-        self.camera?.addTarget(self.filter)
-        self.filter.addTarget(self.imageView!)
-        self.addSubview(self.imageView!)
-        self.camera?.startCapture()
-    }
-    
-    /*required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.backgroundColor = UIColor.black
-        self.imageView = GPUImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 2))
         self.imageView?.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
         self.camera = GPUImageVideoCamera(sessionPreset: AVCaptureSession.Preset.photo.rawValue, cameraPosition: .back)
         self.camera?.outputImageOrientation = .portrait
+        self.camera?.horizontallyMirrorFrontFacingCamera = true
         self.camera?.addTarget(self.filter)
         self.filter.addTarget(self.imageView!)
         self.addSubview(self.imageView!)
@@ -50,8 +40,9 @@ class CameraScreenView: UIView {
         
         if let imageView: GPUImageView = self.imageView {
             self.writer = GPUImageMovieWriter(movieURL: self.url, size: CGSize(width: imageView.frame.width, height: imageView.frame.height), fileType: AVFileType.mp4.rawValue, outputSettings: nil)
+            self.writer?.encodingLiveVideo = true
         }
-    }*/
+    }
     
     
     func ajustCameraScreen(view: UIView, point: CGPoint, focusMode: AVCaptureDevice.FocusMode, expusureMode: AVCaptureDevice.ExposureMode, isSubjectAreaChangeMonitoringEnabled: Bool) {
@@ -74,7 +65,7 @@ class CameraScreenView: UIView {
                 }
                 device.isSubjectAreaChangeMonitoringEnabled = isSubjectAreaChangeMonitoringEnabled
                 device.unlockForConfiguration()
-//                print("アジャスト: x = \(p.x), y = \(p.y)")
+                //print("アジャスト: x = \(p.x), y = \(p.y)")
             }
         }
     }
@@ -127,23 +118,10 @@ class CameraScreenView: UIView {
     }
     
     
-    func capture(callback: @escaping (_ image: UIImage?) -> Void) {
-        self.camera?.capturePhotoAsJPEGProcessedUp(toFilter: self.filter, withCompletionHandler: { (data: Data?, error: Error?) in
-            if let d: Data = data {
-                if let image: UIImage = UIImage(data: d) {
-                    let y: CGFloat = (image.size.height - image.size.width) / 2
-                    callback(image.cropping(to: CGRect(x: 0, y: y, width: image.size.width, height: image.size.width)))
-                    return
-                }
-            }
-            callback(nil)
-        })
-    }
-    
-    
-    /*func capture() {
+    func capture() {
+        FileManager.sharedInstance.remove(atPath: FileManager.photoPath)
         self.writer?.startRecording()
-        self.promise = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.finish(_:)), userInfo: nil, repeats: false)
+        self.promise = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.finish(_:)), userInfo: nil, repeats: false)
     }
     
     
@@ -186,6 +164,7 @@ class CameraScreenView: UIView {
                 self.finishCapture?(image)
             })
         })
-    }*/
+    }
     
 }
+*/

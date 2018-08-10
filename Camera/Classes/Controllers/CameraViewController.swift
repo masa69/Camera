@@ -33,9 +33,18 @@ class CameraViewController: UIViewController {
     }
     
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        cameraScreenView.startCapture()
+    }
+    
+    
     private func initNav() {
         self.title = "camera"
         self.item = DefaultNavigationItem(item: self.navigationItem)
+        self.item?.addLeftItem(type: .close, didSelect: {
+            self.dismiss(animated: true, completion: nil)
+        })
         self.item?.addRightItem(named: "icon_cog", didSelect: {
             self.gotoLicence()
         })
@@ -52,24 +61,21 @@ class CameraViewController: UIViewController {
         cameraScreenActionView.pinch = { (sender: UIPinchGestureRecognizer) in
             self.zoom(sender: sender)
         }
-        /*cameraScreenView.finishCapture = { (image: UIImage?) in
-            let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.previewView.frame.width, height: self.previewView.frame.height))
-            imageView.image = image
-            imageView.contentMode = .scaleAspectFill
-            self.previewView.addSubview(imageView)
-        }*/
+        cameraScreenView.finishCapture = { (image: UIImage?) in
+            self.gotoPreview(image: image)
+        }
     }
     
     
     private func initButton() {
         cameraView.borderRadius = cameraView.frame.height / 2
         cameraView.borderWidth = 2
-        cameraView.layer.borderColor = UIColor.black.cgColor
+        cameraView.layer.borderColor = UIColor.ultraDarkGray.cgColor
         cameraView.backgroundColor = UIColor.white
         cameraButton.touchDown = {
             self.capture()
         }
-        cameraPositionView.icon(named: "icon_rotate", color: .white, shadow: true)
+        cameraPositionView.icon(named: "icon_rotate", color: .ultraDarkGray, shadow: false)
         cameraPositionButton.touchDown = {
             self.switchCameraPosition()
         }
@@ -77,9 +83,7 @@ class CameraViewController: UIViewController {
     
     
     private func capture() {
-        cameraScreenView.capture { (image: UIImage?) in
-            self.gotoPreview(image: image)
-        }
+        cameraScreenView.capture()
     }
     
     
