@@ -249,7 +249,14 @@ class AVFStillCamera: UIView, AVCapturePhotoCaptureDelegate {
         self.isCapturing = false
         if let sampleBuffer: CMSampleBuffer = photoSampleBuffer {
             if let data: Data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer) {
-                self.finishCapture?(UIImage(data: data))
+                if let image: UIImage = UIImage(data: data) {
+                    let scale: CGFloat = min(image.size.width / self.frame.width, image.size.height / self.frame.height)
+                    let width: CGFloat = self.frame.width * scale
+                    let height: CGFloat = self.frame.height * scale
+                    let x: CGFloat = (image.size.width - width) / 2
+                    let y: CGFloat = (image.size.height - height) / 2
+                    self.finishCapture?(image.cropping(to: CGRect(x: x, y: y, width: width, height: height)))
+                }
             }
         }
     }
