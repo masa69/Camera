@@ -35,7 +35,7 @@ class CameraViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        cameraScreenView.startCapture()
+        cameraScreenView.start()
     }
     
     
@@ -43,7 +43,7 @@ class CameraViewController: UIViewController {
         self.title = "camera"
         self.item = DefaultNavigationItem(item: self.navigationItem)
         self.item?.addLeftItem(type: .close, didSelect: {
-            self.dismiss(animated: true, completion: nil)
+            self.close()
         })
         self.item?.addRightItem(named: "icon_cog", didSelect: {
             self.gotoLicence()
@@ -123,6 +123,12 @@ class CameraViewController: UIViewController {
         let storyboard: UIStoryboard = UIStoryboard(name: "Licence", bundle: nil)
         let vc: LicenceViewController = storyboard.instantiateViewController(withIdentifier: "Licence") as! LicenceViewController
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    private func close() {
+        cameraScreenView.finish()
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

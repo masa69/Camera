@@ -26,11 +26,11 @@ class StillCamera: UIView {
     }
     
     
-    func startCapture() {
+    func start() {
         if self.isReady {
             return
         }
-        self.imageView = GPUImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width))
+        self.imageView = GPUImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         self.imageView?.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
         self.camera = GPUImageStillCamera(sessionPreset: AVCaptureSession.Preset.photo.rawValue, cameraPosition: .back)
         self.camera?.outputImageOrientation = .portrait
@@ -41,6 +41,12 @@ class StillCamera: UIView {
         self.camera?.startCapture()
         self.isReady = true
     }
+    
+    
+    func finish() {
+        
+    }
+    
     
     func ajustCameraScreen(view: UIView, point: CGPoint, focusMode: AVCaptureDevice.FocusMode, expusureMode: AVCaptureDevice.ExposureMode, isSubjectAreaChangeMonitoringEnabled: Bool) {
         DispatchQueue.main.async {

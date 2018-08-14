@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Kv-oh-wlf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Kv-oh-wlf">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5u9-hi-Wab" customClass="CameraScreenView" customModule="Camera" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="320"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.8771524235" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gJ-Eo-ip8" customClass="CameraScreenActionView" customModule="Camera" customModuleProvider="target">
@@ -75,8 +75,8 @@
                             <constraint firstItem="4gJ-Eo-ip8" firstAttribute="height" secondItem="5u9-hi-Wab" secondAttribute="width" id="Exb-va-Z2a"/>
                             <constraint firstItem="loq-IT-Fp5" firstAttribute="centerX" secondItem="Xzu-zb-sto" secondAttribute="centerX" id="V90-24-cOs"/>
                             <constraint firstItem="4gJ-Eo-ip8" firstAttribute="top" secondItem="c5T-Av-UTA" secondAttribute="top" id="YA6-38-DI8"/>
+                            <constraint firstItem="5u9-hi-Wab" firstAttribute="height" secondItem="Xzu-zb-sto" secondAttribute="width" id="axM-al-hOW"/>
                             <constraint firstItem="c5T-Av-UTA" firstAttribute="trailing" secondItem="4gJ-Eo-ip8" secondAttribute="trailing" id="gnp-XF-xDu"/>
-                            <constraint firstItem="c5T-Av-UTA" firstAttribute="bottom" secondItem="5u9-hi-Wab" secondAttribute="bottom" id="mEf-4z-6b2"/>
                             <constraint firstItem="c5T-Av-UTA" firstAttribute="bottom" secondItem="LE0-zD-eei" secondAttribute="bottom" constant="34" id="mFc-uJ-CLP"/>
                             <constraint firstItem="c5T-Av-UTA" firstAttribute="trailing" secondItem="5u9-hi-Wab" secondAttribute="trailing" id="qxY-LQ-OgS"/>
                             <constraint firstItem="5u9-hi-Wab" firstAttribute="top" secondItem="c5T-Av-UTA" secondAttribute="top" id="zCm-hP-FJ1"/>
