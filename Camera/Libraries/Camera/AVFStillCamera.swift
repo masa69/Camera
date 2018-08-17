@@ -139,6 +139,9 @@ class AVFStillCamera: UIView, AVCapturePhotoCaptureDelegate {
     
     
     func ajustCameraScreen(view: UIView, point: CGPoint, focusMode: AVCaptureDevice.FocusMode, expusureMode: AVCaptureDevice.ExposureMode, isSubjectAreaChangeMonitoringEnabled: Bool) {
+        if !self.isReady {
+            return
+        }
         DispatchQueue.main.async {
             guard let device: AVCaptureDevice = self.device else {
                 return
@@ -165,6 +168,9 @@ class AVFStillCamera: UIView, AVCapturePhotoCaptureDelegate {
     
     
     func zoom(pinch: UIPinchGestureRecognizer) {
+        if !self.isReady {
+            return
+        }
         guard let captureDevice: AVCaptureDevice = self.device else {
             return
         }
@@ -206,6 +212,9 @@ class AVFStillCamera: UIView, AVCapturePhotoCaptureDelegate {
     
     
     func switchCameraPosition() {
+        if !self.isReady {
+            return
+        }
         if self.isCapturing {
             return
         }
@@ -231,6 +240,9 @@ class AVFStillCamera: UIView, AVCapturePhotoCaptureDelegate {
     
     
     func capture() {
+        if !self.isReady {
+            return
+        }
         if self.isCapturing {
             return
         }
